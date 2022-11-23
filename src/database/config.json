@@ -1,3 +1,15 @@
 {
-    "port": 3000
+    "port": 3000,
+    "categoryColor": {
+        "motion": "#4c97ff",
+        "looks": "#9966ff",
+        "sound": "#d65cd6",
+        "event": "#ffd500",
+        "control": "#ffab19",
+        "sensing": "#4cbfe6",
+        "operators": "#40bf4a",
+        "data": "##ff8c1a",
+        "moreBlocks": "#ff6680",
+        "undefined": "#000000"
+    }
 }
