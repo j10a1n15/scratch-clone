@@ -53,10 +53,23 @@ async function displayBlocks(sortedBlocks) {
     blockElement.appendChild(blockList)
 
     blocks.forEach(async block => {
+        const textLength = Number(getTextWidth(block.name, getCanvasFont()) + 10)
         const blockElement = document.createElement("li")
         blockElement.id = block.name
-        blockElement.innerHTML = `<div class="block" style="background-color: ${getColor(block.category)}; border-color: ${shadeColor(await getColor(block.category), -20)}; color: black;">${block.name}</div>`
+        blockElement.innerHTML = `<div class="block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" width="100%" height="100%" viewBox='0 0 300 50'>
+                                        <path fill="${await getColor(block.category)}" d="M 0 0 C 5.0003 0 9.9998 0 15 0 C 15 0 15 7.5 22.5 7.5 C 30 7.5 30 0 30 0 L 90 0 V 0 M ${textLength} 0 L ${textLength} 30 L 30 30 C 30 30 30 37.5 22.5 37.5 C 15 37.5 17.4998 32.4997 15 30 L 0 30 L 0 0 L 30 0"/>
+                                        <text x="5" y="21">${block.name}</text>
+                                    </svg>
+                                </div>`
+        //blockElement.innerHTML = `<div class="block" style="background-color: ${getColor(block.category)}; border-color: ${shadeColor(await getColor(block.category), -20)}; color: black;">${block.name}</div>`
         blockList.appendChild(blockElement)
+
+
+        blockElement.addEventListener("click", () => {
+            const block = blocks.find(block => block.name === blockElement.id)
+            console.log(block)
+        })
     })
 
 }
@@ -105,4 +118,33 @@ function shadeColor(color, percent) {
     var BB = ((B.toString(16).length == 1) ? "0" + B.toString(16) : B.toString(16));
 
     return "#" + RR + GG + BB;
+}
+
+/**
+  * Uses canvas.measureText to compute and return the width of the given text of given font in pixels.
+  * 
+  * @param {String} text The text to be rendered.
+  * @param {String} font The css font descriptor that text is to be rendered with (e.g. "bold 14px verdana").
+  * 
+  * @see https://stackoverflow.com/questions/118241/calculate-text-width-with-javascript/21015393#21015393
+  */
+function getTextWidth(text, font) {
+    // re-use canvas object for better performance
+    const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+    const context = canvas.getContext("2d");
+    context.font = font;
+    const metrics = context.measureText(text);
+    return metrics.width;
+}
+
+function getCssStyle(element, prop) {
+    return window.getComputedStyle(element, null).getPropertyValue(prop);
+}
+
+function getCanvasFont(el = document.body) {
+    const fontWeight = getCssStyle(el, 'font-weight') || 'normal';
+    const fontSize = getCssStyle(el, 'font-size') || '12px';
+    const fontFamily = getCssStyle(el, 'font-family') || 'Arial';
+
+    return `${fontWeight} ${fontSize} ${fontFamily}`;
 }

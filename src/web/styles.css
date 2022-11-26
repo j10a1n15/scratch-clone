@@ -1,6 +1,8 @@
 body {
     background-color: #474747;
-    color: white
+    color: white;
+    font-family: Arial;
+    size: 12px;
 }
 
 
@@ -48,9 +50,12 @@ body {
 }
 
 #gui-editor-blocks ul li{
-    border-bottom: 1px solid #474747;
+    border-bottom: 1px solid #808080;
     padding: 5px;
+    padding-bottom: 15px;
     cursor: pointer;
+    touch-action: none;
+    height: 40px
 }
 
 .circle{
