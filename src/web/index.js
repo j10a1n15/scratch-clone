@@ -14,6 +14,8 @@ async function handleBlocks() {
         }
     })
 
+    console.log(`Loaded ${blocks.thing.length} blocks from ${categories.length} categories`)
+
     displayCategories(categories, sortedBlocks)
     displayBlocks(sortedBlocks)
 }
@@ -40,6 +42,8 @@ async function displayCategories(categories, sortedBlocks) {
         })
 
         ul.children[0].classList.add("active")
+
+        console.log(`Loaded category ${category}`)
     })
 }
 
@@ -68,6 +72,8 @@ async function displayBlocks(sortedBlocks) {
             const block = blocks.find(block => block.name === blockElement.id)
             console.log(block)
         })
+
+        console.log(`Loaded block ${block.name}`)
     })
 
 }
@@ -78,8 +84,6 @@ async function returnBlockPath(category, textLength) {
         "motion": `M 0 0 C 5.0003 0 9.9998 0 15 0 C 15 0 15 7.5 22.5 7.5 C 30 7.5 30 0 30 0 L ${textLength} 0 V 0 M ${textLength} 0 L ${textLength} 30 L 30 30 C 30 30 30 37.5 22.5 37.5 C 15 37.5 15 30 15 30 L 0 30 L 0 0 L 30 0`,
     }
     const square = `M 0 0 C 5.0003 0 9.9998 0 15 0 L 90 0 V 0 M ${textLength} 0 L ${textLength} 30 L 30 30 L 0 30 L 0 0 L 30 0`
-
-    console.log(list[category])
 
     return list[category] || square
 }
