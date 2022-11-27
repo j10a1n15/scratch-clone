@@ -4,7 +4,8 @@
   "description": "This is only a copy of [this project](https://github.com/LLK/), written by myself.\r My point is not to copy Scratch in any way, this is only for a school project.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "J10a1n15",
   "license": "ISC",
