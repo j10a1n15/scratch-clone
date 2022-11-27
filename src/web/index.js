@@ -58,13 +58,11 @@ async function displayBlocks(sortedBlocks) {
         blockElement.id = block.name
         blockElement.innerHTML = `<div class="block">
                                     <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" width="100%" height="100%" viewBox='0 0 300 50'>
-                                        <path fill="${await getColor(block.category)}" d="M 0 0 C 5.0003 0 9.9998 0 15 0 C 15 0 15 7.5 22.5 7.5 C 30 7.5 30 0 30 0 L 90 0 V 0 M ${textLength} 0 L ${textLength} 30 L 30 30 C 30 30 30 37.5 22.5 37.5 C 15 37.5 17.4998 32.4997 15 30 L 0 30 L 0 0 L 30 0"/>
+                                        <path fill="${await getColor(block.category)}" d="${await returnBlockPath(block.category, textLength)}"/>
                                         <text x="5" y="21">${block.name}</text>
                                     </svg>
                                 </div>`
-        //blockElement.innerHTML = `<div class="block" style="background-color: ${getColor(block.category)}; border-color: ${shadeColor(await getColor(block.category), -20)}; color: black;">${block.name}</div>`
         blockList.appendChild(blockElement)
-
 
         blockElement.addEventListener("click", () => {
             const block = blocks.find(block => block.name === blockElement.id)
@@ -72,6 +70,18 @@ async function displayBlocks(sortedBlocks) {
         })
     })
 
+}
+
+async function returnBlockPath(category, textLength) {
+
+    const list = {
+        "motion": `M 0 0 C 5.0003 0 9.9998 0 15 0 C 15 0 15 7.5 22.5 7.5 C 30 7.5 30 0 30 0 L ${textLength} 0 V 0 M ${textLength} 0 L ${textLength} 30 L 30 30 C 30 30 30 37.5 22.5 37.5 C 15 37.5 15 30 15 30 L 0 30 L 0 0 L 30 0`,
+    }
+    const square = `M 0 0 C 5.0003 0 9.9998 0 15 0 L 90 0 V 0 M ${textLength} 0 L ${textLength} 30 L 30 30 L 0 30 L 0 0 L 30 0`
+
+    console.log(list[category])
+
+    return list[category] || square
 }
 
 async function getColor(category) {
