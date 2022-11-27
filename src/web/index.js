@@ -1,8 +1,8 @@
 let currentCategory = "motion"
 
-window.onload(() => {
- handleBlocks()
-})
+window.onload = async (event) => {
+    handleBlocks()
+}
 
 async function handleBlocks() {
     const blocks = await getBlocks()
